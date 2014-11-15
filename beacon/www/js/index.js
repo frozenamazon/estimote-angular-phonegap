@@ -36,21 +36,15 @@ var app = {
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
-receivedEvent: function(id) {
-    alert('read');
-    var beaconsList = document.getElementById('beacons');
-    // start looking for beacons
-    window.EstimoteBeacons.startRangingBeaconsInRegion(function () {
-                                                       //every now and then get the list of beacons in range
-                                                       setInterval(function () {
-                                                                   window.EstimoteBeacons.getBeacons(function (data) {
-                                                                                                     //do something cool with the list of beacons
-                                                                                                     var item = document.createElement('li');
-                                                                                                     item.innerText = data;
-                                                                                                     beaconsList.appendChild(data);
-                                                                                                     });
-                                                                   }, 1000);
-                                                       });
+    receivedEvent: function(id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+
+        console.log('Received Event: ' + id);
     }
 };
 

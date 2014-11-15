@@ -5,6 +5,20 @@
     },
     "config_munge": {
         "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"EstimoteBeacons\"><param name=\"ios-package\" value=\"EstimoteBeacons\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
             "framework": {
                 "parents": {
                     "CoreBluetooth.framework": [
@@ -26,22 +40,15 @@
                         }
                     ]
                 }
-            },
-            "config.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<feature name=\"EstimoteBeacons\"><param name=\"ios-package\" value=\"EstimoteBeacons\" /></feature>",
-                            "count": 1
-                        }
-                    ]
-                }
             }
         }
     },
     "installed_plugins": {
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "com.beacon.beacon"
+        },
         "pl.makingwaves.estimotebeacons": {
-            "PACKAGE_NAME": "com.macquarie.beacon"
+            "PACKAGE_NAME": "com.beacon.beacon"
         }
     },
     "dependent_plugins": {}
