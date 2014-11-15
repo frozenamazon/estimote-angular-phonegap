@@ -1,84 +1,56 @@
-// The app object is defined in a closure to make it easier to
-// change its visible name, if that would be needed.
-var app = (function()
+(function()
 {
-	// Application object.
-	var app = {};
-
-	// ------------- Private helper functions ------------- //
-
-	function onDeviceReady()
-	{
-		// TODO: Add functionality if needed.
-	}
-
-	app.startScanning = function()
-	{
-		function onScan(beaconInfo)
-		{
-			//console.log('onScan');
-			displayBeconInfo(beaconInfo);
-		}
+	var app = angular.module('Beacon', []);
+	
+	app.controller('BeaconCtrl', ['$scope', 'configuration', function($scope, configuration){
 
 		function onError(errorMessage)
 		{
 			console.log('Scan error: ' + errorMessage);
 		}
 
-		function displayBeconInfo(beaconInfo)
-		{
-			//console.log('displayBeconInfo');
-			// Clear beacon HTML items.
-			$('.style-beacon-list').empty();
-
+		function onScan(beacons){
 			// Sort beacons by signal strength.
-			beaconInfo.beacons.sort(function(beacon1, beacon2) {
+			beacons.beacons.sort(function(beacon1, beacon2) {
 				return beacon1.rssi > beacon2.rssi; });
 
-			// Generate HTML for beacons.
-			var html = '';
-			$.each(beaconInfo.beacons, function(key, beacon)
+			$scope.beaconList = beacons.beacons;
+			$scope.$apply();
+		}
+
+		function onDeviceReady(){
+
+		}
+
+		$scope.beaconColor = function(color){
+			if (!color)
 			{
-				// jQuery doesn't work.
-				var element = $(createBeaconHTML(beacon));
-				$('.style-beacon-list').append(element);
-			});
+				color = 0;
+			}
+
+			// Eliminate bad values (just in case).
+			color = Math.max(0, color);
+			color = Math.min(5, color);
+
+			// Return style class for color.
+			return configuration.beaconColorStyles[color];
 		};
 
-		function createBeaconHTML(beacon)
-		{
-			console.log('beacon: '+beacon.major+' '+beacon.minor+', '+beacon.rssi+' ('+beacon.measuredPower+')');
-			htm = '<div class="style-color-mint style-color-mint-text">'
-				+ '<table><tr><td>Major</td><td>' + beacon.major
-				+ '</td></tr><tr><td>Minor</td><td>' + beacon.minor
-				+ '</td></tr><tr><td>RSSI</td><td>' + beacon.rssi
-				+ '</td></tr><tr><td>Measured power</td><td>' + beacon.measuredPower
-				+ '</td></tr><tr><td>MAC address</td><td>' + beacon.macAddress
-				+ '</td></tr></table></div>';
-			return htm;
-		};
+		$scope.scanBeacons = function(){
 
-		console.log("startEstimoteBeaconsDiscoveryForRegion")
-
-		EstimoteBeacons.startEstimoteBeaconsDiscoveryForRegion(
+			EstimoteBeacons.startEstimoteBeaconsDiscoveryForRegion(
 			{}, // Empty region matches all beacons.
 			onScan,
 			onError);
-	};
+		};
 
-	app.stopScanning = function()
-	{
-		console.log("stopEstimoteBeaconDiscovery")
-		EstimoteBeacons.stopEstimoteBeaconDiscovery();
-	};
+		$scope.stopScanning = function(){
+			EstimoteBeacons.stopEstimoteBeaconDiscovery();
+		};
 
-	// ------------- Initialisation ------------- //
+		// ------------- Initialisation ------------- //
+		document.addEventListener('deviceready', onDeviceReady, false);	
 
-	document.addEventListener('deviceready', onDeviceReady, false);
-
-
-	// ------------- Return application object ------------- //
-
-	return app;
+	}]);
 
 })();

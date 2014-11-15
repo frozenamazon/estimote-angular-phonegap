@@ -15,16 +15,46 @@
 		};
 		</script>
 	</head>
-	<body>
+	<body ng-app="Beacon" ng-controller="BeaconCtrl">
 
-		<div class="style-button style-color-blueberry"
-				ontouchend="app.startScanning()">Scan Beacons</div>
+		<header></header>
 
-		
-		<div class="style-beacon-list"></div>
+		<main>
+
+			<div class="action-items">
+				<a ng-click="scanBeacons()">Scan Beacons</a>
+				<a ng-click="stopScanning()">Stop scan</a>
+			</div>
+
+			<div class="beacon-list">
+				<div ng-repeat="item in beaconList" ng-class="beaconColor({{item.color}})">
+					<div>
+						<label>Major</label>
+						<span>{{item.major}}</span>
+					</div>
+					<div>
+						<label>Minor</label>
+						<span>{{item.minor}}</span>
+					</div>
+					<div>
+						<label>RSSI</label>
+						<span>{{item.rssi}}</span>
+					</div>
+					<div>
+						<label>Measured power</label>
+						<span>{{item.measuredPower}}</span>
+					</div>
+					<div>
+						<label>Mac Address</label>
+						<span>{{item.macAddress}}</span>
+					</div>
+				</div>
+			</div>
+		</main>
 
 		<script src="cordova.js"></script>
-		<script src="js/jquery-2.1.1.min.js"></script>
+		<script src="js/angular.min.js"></script>
 		<script src="js/index.js"></script>
+		<script src="js/configuration.js"></script>
 	</body>
 </html>

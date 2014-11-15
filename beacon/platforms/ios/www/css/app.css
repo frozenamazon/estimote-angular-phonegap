@@ -14,6 +14,8 @@ html,body
 	-webkit-touch-callout: none;
 	-webkit-text-size-adjust: none;
 	-webkit-user-select: none;
+	max-width: 1000px;
+	margin: 0 auto;
 }
 
 .style-color-white,
@@ -93,63 +95,18 @@ html,body
 	background: rgb(0,0,0);
 }
 
-.style-screen
-{
-	display: none;
+.beacon-list > div{
+	padding: 20px;
 }
 
-.style-heading-big,
-.style-heading-small
-{
-	margin: 0px;
-	padding: 10% 6%;
-	color: white;
-	font-size: 300%;
-	font-weight: bold;
+.action-items{
+	margin: 20px 0;
 }
 
-.style-button
-{
-	margin: 0px;
-	padding: 10% 10%;
-	color: white;
-	font-size: 175%;
-	font-weight: bold;
-}
-
-.style-button:active
-{
-	opacity: 0.9;
-}
-
-.style-button-back
-{
-	margin: 0px;
-	padding: 4% 6%;
-	color: white;
-	font-size: 140%;
-	font-weight: bold;
-}
-
-.style-button-back:active
-{
-	opacity: 0.9;
-}
-
-.style-beacon-list div
-{
-	margin: 1.5%;
-	padding: 1% 2%;
-	color: white;
-	font-size: 100%;
-	font-weight: bold;
-}
-
-.style-beacon-data
-{
-	margin: 0px;
-	padding: 4% 10%;
-	color: white;
-	font-size: 140%;
-	font-weight: bold;
+.action-items a{
+	padding: 8px 10px;
+	background-color: #09C;
+	color: #fff;
+	display: inline-block;
+	border-radius: 4px;
 }
