@@ -1,0 +1,112 @@
+
+* {
+	/* make transparent link selection, adjust last value opacity 0 to 1.0 */
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+html,body
+{
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	background: white;
+	font-family: Helvetica, Arial, sans-serif;
+	-webkit-touch-callout: none;
+	-webkit-text-size-adjust: none;
+	-webkit-user-select: none;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.style-color-white,
+.style-color-unknown,
+.style-color-transparent
+{
+	background: rgb(255,255,255);
+}
+
+.style-color-white-text,
+.style-color-unknown-text,
+.style-color-transparent-text
+{
+	color: rgb(0,0,0) !important;
+}
+
+.style-color-mint
+{
+	/*background: #98c6a7;*/
+	background: rgb(215,228,177);
+}
+
+.style-color-mint-text
+{
+	color: rgb(0,0,0) !important;
+}
+
+.style-color-ice
+{
+	/*background: #9fddf9;*/
+	/*background: rgb(200,238,248);*/
+	background: rgb(165,213,209);
+}
+
+.style-color-ice-text
+{
+	color: rgb(0,0,0) !important;
+}
+
+.style-color-blueberry
+{
+	background: #5c58a7;
+}
+
+.style-color-blueberry-text
+{
+	color: rgb(0,0,0) !important;
+}
+
+.style-color-blueberry-dark
+{
+	background: #2d2756;
+}
+
+.style-color-blueberry-dark-text
+{
+	color: rgb(255,255,255) !important;
+}
+
+.style-color-purple
+{
+	background: #872369;
+}
+
+.style-color-yellow
+{
+	background: #d6d422;
+}
+
+.style-color-pink
+{
+	background: #e88ab4;
+}
+
+.style-color-black
+{
+	background: rgb(0,0,0);
+}
+
+.beacon-list > div{
+	padding: 20px;
+}
+
+.action-items{
+	margin: 20px 0;
+}
+
+.action-items a{
+	padding: 8px 10px;
+	background-color: #09C;
+	color: #fff;
+	display: inline-block;
+	border-radius: 4px;
+}

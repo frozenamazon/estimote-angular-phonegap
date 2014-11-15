@@ -1,51 +1,56 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+(function()
+{
+	var app = angular.module('Beacon', []);
+	
+	app.controller('BeaconCtrl', ['$scope', 'configuration', function($scope, configuration){
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+		function onError(errorMessage)
+		{
+			console.log('Scan error: ' + errorMessage);
+		}
 
-        console.log('Received Event: ' + id);
-    }
-};
+		function onScan(beacons){
+			// Sort beacons by signal strength.
+			beacons.beacons.sort(function(beacon1, beacon2) {
+				return beacon1.rssi > beacon2.rssi; });
 
-app.initialize();
+			$scope.beaconList = beacons.beacons;
+			$scope.$apply();
+		}
+
+		function onDeviceReady(){
+
+		}
+
+		$scope.beaconColor = function(color){
+			if (!color)
+			{
+				color = 0;
+			}
+
+			// Eliminate bad values (just in case).
+			color = Math.max(0, color);
+			color = Math.min(5, color);
+
+			// Return style class for color.
+			return configuration.beaconColorStyles[color];
+		};
+
+		$scope.scanBeacons = function(){
+
+			EstimoteBeacons.startEstimoteBeaconsDiscoveryForRegion(
+			{}, // Empty region matches all beacons.
+			onScan,
+			onError);
+		};
+
+		$scope.stopScanning = function(){
+			EstimoteBeacons.stopEstimoteBeaconDiscovery();
+		};
+
+		// ------------- Initialisation ------------- //
+		document.addEventListener('deviceready', onDeviceReady, false);	
+
+	}]);
+
+})();
