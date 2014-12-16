@@ -303,7 +303,7 @@ TODO: Remove.
 		[self.commandDelegate
 			sendPluginResult:result
 			callbackId:self.callbackId_startEstimoteBeaconsDiscoveryForRegion];
-	}
+    }
 }
 
 /**

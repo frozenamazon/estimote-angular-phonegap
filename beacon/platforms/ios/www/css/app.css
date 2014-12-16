@@ -96,7 +96,7 @@ html,body
 }
 
 .beacon-list > div{
-	padding: 20px;
+	padding: 10px;
 }
 
 .action-items{
@@ -109,4 +109,22 @@ html,body
 	color: #fff;
 	display: inline-block;
 	border-radius: 4px;
+}
+
+header{
+	border-bottom: solid 1px #872369;
+}
+
+header h2{
+	margin: 10px;
+}
+
+.ads{
+	background-color: #98c6a7;
+	margin: 10px 0;
+	padding: 10px;
+}
+
+.action-items{
+	margin: 10px;
 }

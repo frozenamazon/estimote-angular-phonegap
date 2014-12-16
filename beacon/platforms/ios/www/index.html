@@ -5,6 +5,7 @@
 		<meta name="format-detection" content="telephone=no" />
 		<meta name="viewport" content="width=device-width, user-scalable=no,
 			initial-scale=1, maximum-scale=1, minimum-scale=1" />
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
 		<link rel="stylesheet" href="css/app.css" />
 		<title>Beacon Finder</title>
 		<script>
@@ -17,16 +18,14 @@
 	</head>
 	<body ng-app="Beacon" ng-controller="BeaconCtrl">
 
-		<header></header>
+		<header>
+			<h2>iBacon</h2>
+		</header>
 
 		<main>
+			{{error}}
 
-			<div class="action-items">
-				<a ng-click="scanBeacons()">Scan Beacons</a>
-				<a ng-click="stopScanning()">Stop scan</a>
-			</div>
-
-			<div class="beacon-list">
+			<div class="beacon-list" ng-show="showBeaconList">
 				<div ng-repeat="item in beaconList" ng-class="beaconColor({{item.color}})">
 					<div>
 						<label>Major</label>
@@ -49,6 +48,17 @@
 						<span>{{item.macAddress}}</span>
 					</div>
 				</div>
+			</div>
+
+			<div class="ads">
+				{{ad}}
+			</div>
+
+			<div class="action-items">
+				<a ng-click="scanBeacons()" ng-show="!scanFlag"><i class="fa fa-play"></i></a>
+				<a ng-click="stopScanning()" ng-show="scanFlag"><i class="fa fa-stop"></i></a>
+				<a ng-click="clearAds()">Clear ads</a>
+				<a ng-click="showBeaconList = !showBeaconList"><span ng-show="showBeaconList">Hide</span><span ng-show="!showBeaconList">Show</span> beacons</a>
 			</div>
 		</main>
 
